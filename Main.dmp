@@ -1,0 +1,136 @@
+00001  0000             ; 10 SYS (2304)
+00002  0001             
+00003  0001             *=$0801
+00004  0801             
+00005  0801  0E 08 0A              BYTE    $0E, $08, $0A, $00, $9E, $20, $28,  $32, $33, $30, $34, $29, $00, $00, $00
+00006  0810             
+00007  0810             
+00008  0810             *=$0900
+00009  0900             PROGRAM_START 
+00010  0900             
+00011  0900  A2 00                 LDX #0
+00012  0902             EYE_FRONT_DATA_LOOP 
+00013  0902  BD 28 09              LDA EYE_FRONT_DATA,X
+00014  0905  9D 80 2E              STA $2E80,X
+00015  0908  E8                    INX
+00016  0909  E0 40                 CPX #64
+00017  090B  D0 F5                 BNE EYE_FRONT_DATA_LOOP
+00018  090D             
+00019  090D  A2 00                 LDX #0
+00020  090F             EYE_LEFT_DATA_LOOP 
+00021  090F  BD 68 09              LDA EYE_LEFT_DATA,X
+00022  0912  9D C0 2E              STA $2EC0,X
+00023  0915  E8                    INX
+00024  0916  E0 40                 CPX #64
+00025  0918  D0 F5                 BNE EYE_LEFT_DATA_LOOP
+00026  091A             
+00027  091A  A2 00                 LDX #0
+00028  091C             EYE_RIGHT_DATA_LOOP 
+00029  091C  BD A8 09              LDA EYE_RIGHT_DATA,X
+00030  091F  9D 00 2F              STA $2F00,X
+00031  0922  E8                    INX
+00032  0923  E0 40                 CPX #64
+00033  0925  D0 F5                 BNE EYE_RIGHT_DATA_LOOP
+00034  0927                        
+00035  0927             
+00036  0927             PROGRAM_END 
+00037  0927  60                    RTS
+00038  0928                        
+00039  0928             
+00040  0928             
+00041  0928             EYE_FRONT_DATA 
+00042  0928             ; EYE_FRONT
+00043  0928  00 7E 00              BYTE $00,$7E,$00
+00044  092B  03 81 C0              BYTE $03,$81,$C0
+00045  092E  0C 7E 30              BYTE $0C,$7E,$30
+00046  0931  13 FF C8              BYTE $13,$FF,$C8
+00047  0934  2F FF F4              BYTE $2F,$FF,$F4
+00048  0937  2F FF F4              BYTE $2F,$FF,$F4
+00049  093A  5F FF FA              BYTE $5F,$FF,$FA
+00050  093D  5F C3 FA              BYTE $5F,$C3,$FA
+00051  0940  5F 81 FA              BYTE $5F,$81,$FA
+00052  0943  BF 00 FD              BYTE $BF,$00,$FD
+00053  0946  BF 00 FD              BYTE $BF,$00,$FD
+00054  0949  BF 00 FD              BYTE $BF,$00,$FD
+00055  094C  5F 81 FA              BYTE $5F,$81,$FA
+00056  094F  5F C3 FA              BYTE $5F,$C3,$FA
+00057  0952  5F FF FA              BYTE $5F,$FF,$FA
+00058  0955  2F FF F4              BYTE $2F,$FF,$F4
+00059  0958  2F FF F4              BYTE $2F,$FF,$F4
+00060  095B  13 FF C8              BYTE $13,$FF,$C8
+00061  095E  0C 7E 30              BYTE $0C,$7E,$30
+00062  0961  03 81 C0              BYTE $03,$81,$C0
+00063  0964  00 7E 00              BYTE $00,$7E,$00
+00064  0967  00                    BYTE $00
+00065  0968             
+00066  0968             EYE_LEFT_DATA 
+00067  0968             ; EYE_LEFT
+00068  0968  00 7E 00              BYTE $00,$7E,$00
+00069  096B  03 81 C0              BYTE $03,$81,$C0
+00070  096E  0C 7E 30              BYTE $0C,$7E,$30
+00071  0971  13 FF C8              BYTE $13,$FF,$C8
+00072  0974  2F FF F4              BYTE $2F,$FF,$F4
+00073  0977  2F FF F4              BYTE $2F,$FF,$F4
+00074  097A  5F FF FA              BYTE $5F,$FF,$FA
+00075  097D  5C 7F FA              BYTE $5C,$7F,$FA
+00076  0980  58 3F FA              BYTE $58,$3F,$FA
+00077  0983  B8 3F FD              BYTE $B8,$3F,$FD
+00078  0986  B8 3F FD              BYTE $B8,$3F,$FD
+00079  0989  B8 3F FD              BYTE $B8,$3F,$FD
+00080  098C  58 3F FA              BYTE $58,$3F,$FA
+00081  098F  5C 7F FA              BYTE $5C,$7F,$FA
+00082  0992  5F FF FA              BYTE $5F,$FF,$FA
+00083  0995  2F FF F4              BYTE $2F,$FF,$F4
+00084  0998  2F FF F4              BYTE $2F,$FF,$F4
+00085  099B  13 FF C8              BYTE $13,$FF,$C8
+00086  099E  0C 7E 30              BYTE $0C,$7E,$30
+00087  09A1  03 81 C0              BYTE $03,$81,$C0
+00088  09A4  00 7E 00              BYTE $00,$7E,$00
+00089  09A7  00                    BYTE $00
+00090  09A8             
+00091  09A8             EYE_RIGHT_DATA 
+00092  09A8             ; EYE RIGHT
+00093  09A8  00 7E 00              BYTE $00,$7E,$00
+00094  09AB  03 81 C0              BYTE $03,$81,$C0
+00095  09AE  0C 7E 30              BYTE $0C,$7E,$30
+00096  09B1  13 FF C8              BYTE $13,$FF,$C8
+00097  09B4  2F FF F4              BYTE $2F,$FF,$F4
+00098  09B7  2F FF F4              BYTE $2F,$FF,$F4
+00099  09BA  5F FF FA              BYTE $5F,$FF,$FA
+00100  09BD  5F FE 3A              BYTE $5F,$FE,$3A
+00101  09C0  5F FC 1A              BYTE $5F,$FC,$1A
+00102  09C3  BF FC 1D              BYTE $BF,$FC,$1D
+00103  09C6  BF FC 1D              BYTE $BF,$FC,$1D
+00104  09C9  BF FC 1D              BYTE $BF,$FC,$1D
+00105  09CC  5F FC 1A              BYTE $5F,$FC,$1A
+00106  09CF  5F FE 3A              BYTE $5F,$FE,$3A
+00107  09D2  5F FF FA              BYTE $5F,$FF,$FA
+00108  09D5  2F FF F4              BYTE $2F,$FF,$F4
+00109  09D8  2F FF F4              BYTE $2F,$FF,$F4
+00110  09DB  13 FF C8              BYTE $13,$FF,$C8
+00111  09DE  0C 7E 30              BYTE $0C,$7E,$30
+00112  09E1  03 81 C0              BYTE $03,$81,$C0
+00113  09E4  00 7E 00              BYTE $00,$7E,$00
+00114  09E7  00                    BYTE $00
+00115  09E8             
+00116  09E8             
+
+******* 8 Label(s) *******
+EYE_FRONT_DATA = $0928 
+eye_front_data_loop = $0902 
+EYE_LEFT_DATA = $0968 
+eye_left_data_loop = $090F 
+EYE_RIGHT_DATA = $09A8 
+eye_right_data_loop = $091C 
+PROGRAM_END = $0927 
+PROGRAM_START = $0900 
+
+******* 2 Unused label(s) *******
+PROGRAM_END
+PROGRAM_START
+
+******* 1 Variable(s) *******
+tgt_c64  = $0001
+******* 1 Unused variables(s) *******
+tgt_c64
+
