@@ -39,9 +39,14 @@ eye_right_data_loop
         lda #$2e80/64
         sta $07f8
 
-        ;set sprite 0 position
-        lda #60
+        ;set sprite 0 x-position
+        lda #%00111111
+        ldx #%00000001
         sta $d000
+        stx $d010
+
+        ;set sprite 0 y-position
+        lda #50
         sta $d001
         
         ;enable sprite 0
