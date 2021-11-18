@@ -8,8 +8,50 @@
 *=$0900
 PROGRAM_START
 
-;testing GitHub integration
+        ;transfer EYE_FRONT_DATA byte info to memory
+        ldx #0
+eye_front_data_loop
+        lda EYE_FRONT_DATA,X
+        sta $2e80,X
+        inx
+        cpx #64
+        bne eye_front_data_loop
+
+        ;transfer EYE_LEFT_DATA byte info to memory
+        ldx #0
+eye_left_data_loop
+        lda EYE_LEFT_DATA,X
+        sta $2ec0,X
+        inx
+        cpx #64
+        bne eye_left_data_loop
+
+        ;transfer EYE_RIGHT_DATA byte info to memory
+        ldx #0
+eye_right_data_loop
+        lda EYE_RIGHT_DATA,X
+        sta $2f00,X
+        inx
+        cpx #64
+        bne eye_right_data_loop
+
+        ;set sprite 0 pointer to first frame (eye-front)
+        lda #$2e80/64
+        sta $07f8
+
+        ;set sprite 0 x-position
+        lda #%00111111
+        ldx #%00000001
+        sta $d000
+        stx $d010
+
+        ;set sprite 0 y-position
+        lda #50
+        sta $d001
         
+        ;enable sprite 0
+        lda #1
+        sta $d015
 
 PROGRAM_END
         rts

@@ -8,6 +8,12 @@
 *=$0900
 PROGRAM_START
 
+        ;setup 'interrupt' handling
+        lda #<ANIMATION_ROUTINE
+        sta $0314
+        lda #>ANIMATION_ROUTINE
+        sta $0315
+
         ;transfer EYE_FRONT_DATA byte info to memory
         ldx #0
 eye_front_data_loop
@@ -53,9 +59,18 @@ eye_right_data_loop
         lda #1
         sta $d015
 
+COUNTER BYTE 00
+        jsr ANIMATION_ROUTINE
+
+
 PROGRAM_END
         rts
         
+ANIMATION_ROUTINE
+        lda COUNTER
+        adc #1
+        sta COUNTER
+        jmp $fffe
 
 
 EYE_FRONT_DATA
