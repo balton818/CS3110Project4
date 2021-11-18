@@ -8,6 +8,7 @@
 *=$0900
 PROGRAM_START
 
+        ;transfer EYE_FRONT_DATA byte info to memory
         ldx #0
 eye_front_data_loop
         lda EYE_FRONT_DATA,X
@@ -16,6 +17,7 @@ eye_front_data_loop
         cpx #64
         bne eye_front_data_loop
 
+        ;transfer EYE_LEFT_DATA byte info to memory
         ldx #0
 eye_left_data_loop
         lda EYE_LEFT_DATA,X
@@ -24,6 +26,7 @@ eye_left_data_loop
         cpx #64
         bne eye_left_data_loop
 
+        ;transfer EYE_RIGHT_DATA byte info to memory
         ldx #0
 eye_right_data_loop
         lda EYE_RIGHT_DATA,X
@@ -31,7 +34,19 @@ eye_right_data_loop
         inx
         cpx #64
         bne eye_right_data_loop
+
+        ;set sprite 0 pointer to first frame (eye-front)
+        lda #$2e80/64
+        sta $07f8
+
+        ;set sprite 0 position
+        lda #60
+        sta $d000
+        sta $d001
         
+        ;enable sprite 0
+        lda #1
+        sta $d015
 
 PROGRAM_END
         rts
